@@ -14,8 +14,12 @@ import java.io.IOException;
 public class NewScene {
    public String registryLink = "../views/registryPane.fxml";
    public String mainLink = "../views/mainPane.fxml";
+   public String logInLink = "../views/LoginPane.fxml";
+   public String adminLink = "../views/AdminPane.fxml";
     Parent registryPane =  FXMLLoader.load(getClass().getResource(registryLink));
     Parent mainPane =  FXMLLoader.load(getClass().getResource(mainLink));
+    Parent logInPane =  FXMLLoader.load(getClass().getResource(logInLink));
+    Parent adminPane =  FXMLLoader.load(getClass().getResource(adminLink));
 
     public NewScene() throws IOException {
     }

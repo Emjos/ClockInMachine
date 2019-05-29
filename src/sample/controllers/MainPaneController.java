@@ -34,7 +34,7 @@ public class MainPaneController {
     private SimpleDateFormat timeFormat= new SimpleDateFormat("HH:mm:ss");
     private SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
     private Date timeDate;
-    private NewScene newScene;
+    AlertWindow alertWindow = new AlertWindow();
 
 
 public void clockInButton(){
@@ -47,27 +47,32 @@ public void clockOutButton(){
     System.out.println("Clock Out " + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
 
 }
-
-public void logInButton(){
+@FXML
+public void logInButton(ActionEvent event) throws IOException {
     System.out.println("Email : " + emailText.getText());
-    System.out.println("Password : " +passwordText.getText() );
-    AlertWindow alertWindow = new AlertWindow();
-    alertWindow.setAlert("Cos tam cos tam");
+    System.out.println("Password : " + passwordText.getText());
+
+    if (emailText.getText().equals("Admin") && passwordText.getText().equals("Admin")) {
+        NewScene newScene = new NewScene();
+        newScene.newScene(event, newScene.adminPane);
+        alertWindow.setAlert("Zalogowano jako admin");
+
+    } else if (emailText.getText().equals("User") && passwordText.getText().equals("User")) {
+        NewScene newScene = new NewScene();
+        newScene.newScene(event,newScene.logInPane);
+        alertWindow.setAlert("Zalogowano jako User");
+    }
+    else {
+        alertWindow.setAlert("Bledne dane");
+    }
 
 }
 
-
 @FXML
-void registryLink(ActionEvent event) {
+void registryLink(ActionEvent event) throws IOException {
     System.out.println("Rejestracja");
-
-    try {
-
-        NewScene newScene = new NewScene();
-        newScene.newScene(event,newScene.registryPane);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+    NewScene newScene = new NewScene();
+    newScene.newScene(event,newScene.registryPane);
 
 }
 
