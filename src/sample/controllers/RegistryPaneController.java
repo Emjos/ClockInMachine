@@ -3,6 +3,7 @@ package sample.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -30,6 +31,8 @@ public class RegistryPaneController {
 
     @FXML
     private Button backButton;
+    @FXML
+    private CheckBox adminButton;
 
 @FXML
 public void registryButtonInAction(ActionEvent even){
@@ -39,6 +42,7 @@ public void registryButtonInAction(ActionEvent even){
     System.out.println(emailText.getText());
     System.out.println(passwordText.getText());
     System.out.println(repeatPasswordText.getText());
+    System.out.println(adminButton.isSelected());
     AlertWindow allOk = new AlertWindow();
     if (passwordText.getText().equals(repeatPasswordText.getText())) {
 
