@@ -8,10 +8,7 @@ import javafx.scene.control.*;
 
 
 import java.io.IOException;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.function.ToDoubleBiFunction;
@@ -38,7 +35,7 @@ public class MainPaneController {
     private Hyperlink registryLink;
 
     private SimpleDateFormat timeFormat= new SimpleDateFormat("HH:mm:ss");
-    private SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
     private Date timeDate;
     static String emailCheck = null;
     static String passwordCheck = null ;
@@ -60,19 +57,46 @@ public void clockInButton() throws SQLException, IOException, ClassNotFoundExcep
     }
 
     else if (whatToDo == 2){
-        System.out.println("Clock in " + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
-        String query = "insert into clocks(username, date, clock_in) value ("+emailCheck+","+dateFormat.format(timeDate) +","+timeFormat.format(timeDate)+")";
-        System.out.println(query);
-        // TODO dodwanie do wspolniej tablicy clock clock in, sprawdzanie czy clock in juz nie istnieje
+        System.out.println("Clock in "+ emailText.getText() + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
+
+        String procedue = "{call 30712964_clock_in.add_clock_in(?,?,?)}";
+        ClockInOut(procedue);
+
     }
 }
 
-public void clockOutButton(){
+public void clockOutButton() throws SQLException, IOException, ClassNotFoundException {
     timeDate = new Date();
     System.out.println("Clock Out " + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
+    int whatToDo = checkData(emailText.getText(),passwordText.getText());
+    if(whatToDo == 0){
+        alertWindow.setAlert("Bledne dane");
+    }
+    else if(whatToDo == 1){
+        String nameplusSurname = userName +" " + userSurname;
+        alertWindow.setAlert("\t" +nameplusSurname  + "\n\tJestes Adminem!!\n\tNie musisz sie wylogowywac");
+    }
 
+    else if (whatToDo == 2){
+        System.out.println("Clock out "+ emailText.getText() + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
+
+        String procedue = "{call 30712964_clock_in.add_clock_out(?,?,?)}";
+        ClockInOut(procedue);
+        return;
+
+    }
 }
-@FXML
+//TODO : Sprawdzanie czy juz taka data istnieje, jezeli nie to zapisz nowy jezeli tak to sprawdzic czy dany clock juz jest
+    private void ClockInOut(String procedue) throws SQLException {
+        PreparedStatement pstmt = serverConnect.connection.prepareStatement(procedue);
+        pstmt.setString(1,emailText.getText());
+        pstmt.setString(2,dateFormat.format(timeDate));
+        pstmt.setString(3,timeFormat.format(timeDate));
+
+        pstmt.executeUpdate();
+    }
+
+    @FXML
 public void logInButton(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
 
 int whatToDo = checkData(emailText.getText(),passwordText.getText());
