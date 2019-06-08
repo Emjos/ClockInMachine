@@ -58,14 +58,49 @@ public void clockInButton() throws SQLException, IOException, ClassNotFoundExcep
 
     else if (whatToDo == 2){
         System.out.println("Clock in "+ emailText.getText() + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
+        ///////////////////
 
-        String procedue = "{call 30712964_clock_in.add_clock_in(?,?,?)}";
-        ClockInOut(procedue);
+        clockChcecker();
+        ResultSet rsClock = clockChcecker();
+
+        boolean isExistOut = false;
+
+
+        while (rsClock.next()){
+            String isNullCheck = rsClock.getString(3);
+
+           if (isNullCheck == null){
+               String queryForNull = "{call 30712964_clock_in.upgrade_clock_in(?,?,?)}";
+               ClockInOut(queryForNull);
+           }
+            isExistOut = true;
+
+
+        }
+
+        if (isExistOut == true){
+            System.out.println("Log in istnieje caly");
+        }
+        else if (isExistOut == false) {
+            String procedue = "{call 30712964_clock_in.add_clock_in(?,?,?)}";
+            ClockInOut(procedue);
+
+        }
+
 
     }
 }
 
-public void clockOutButton() throws SQLException, IOException, ClassNotFoundException {
+    private ResultSet clockChcecker() throws SQLException {
+        String query = "{call 30712964_clock_in.check_clock(?,?)}";
+        CallableStatement statement = serverConnect.connection.prepareCall(query);
+        statement.setString(1,emailText.getText());
+        statement.setString(2,dateFormat.format(timeDate));
+        ResultSet rsClock =statement.executeQuery();
+        return rsClock;
+    }
+
+    public void clockOutButton() throws SQLException, IOException, ClassNotFoundException {
     timeDate = new Date();
     System.out.println("Clock Out " + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
     int whatToDo = checkData(emailText.getText(),passwordText.getText());
@@ -79,10 +114,38 @@ public void clockOutButton() throws SQLException, IOException, ClassNotFoundExce
 
     else if (whatToDo == 2){
         System.out.println("Clock out "+ emailText.getText() + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
+        clockChcecker();
+        ResultSet rsClock = clockChcecker();
+        boolean isExist = false;
 
-        String procedue = "{call 30712964_clock_in.add_clock_out(?,?,?)}";
-        ClockInOut(procedue);
-        return;
+
+        while (rsClock.next()){
+
+
+            String isNullCheck = rsClock.getString(4);
+
+            if (isNullCheck == null){
+
+                String queryForNull = "{call 30712964_clock_in.upgrade_clock_out(?,?,?)}";
+
+                ClockInOut(queryForNull);
+            }
+            isExist = true;
+
+
+        }
+
+        if (isExist){
+            System.out.println("Log in istnieje caly");
+        }
+        else if (!isExist) {
+            String procedue = "{call 30712964_clock_in.add_clock_out(?,?,?)}";
+             ClockInOut(procedue);
+
+        }
+
+
+
 
     }
 }
