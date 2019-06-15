@@ -1,6 +1,15 @@
 package sample.controllers;
 
 public class Clocks {
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     private String date;
     private String clockIn;
@@ -32,6 +41,13 @@ public class Clocks {
     }
 
     public Clocks(String date, String clockIn, String clockOut) {
+        this.date = date;
+        this.clockIn = clockIn;
+        ClockOut = clockOut;
+    }
+
+    public Clocks(String email, String date, String clockIn, String clockOut) {
+        this.email = email;
         this.date = date;
         this.clockIn = clockIn;
         ClockOut = clockOut;

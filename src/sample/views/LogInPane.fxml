@@ -11,9 +11,10 @@
       <Button fx:id="backButton" layoutY="374.0" maxWidth="598.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="600.0" text="Back" />
       <TableView fx:id="full_table" layoutY="25.0" maxWidth="598.0" prefHeight="350.0" prefWidth="598.0">
         <columns>
-          <TableColumn fx:id="date_table" maxWidth="199.0" minWidth="199.0" prefWidth="199.0" text="Date" />
-          <TableColumn fx:id="clock_in_table" maxWidth="198.0" minWidth="198.0" prefWidth="198.0" text="Clock_in" />
-            <TableColumn fx:id="clock_out_table" maxWidth="198.0" minWidth="198.0" prefWidth="198.0" text="Clock_out" />
+            <TableColumn fx:id="email_table" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Email" />
+          <TableColumn fx:id="date_table" maxWidth="149.0" minWidth="149.0" prefWidth="149.0" text="Date" />
+          <TableColumn fx:id="clock_in_table" maxWidth="149.0" minWidth="149.0" prefWidth="149.0" text="Clock_in" />
+            <TableColumn fx:id="clock_out_table" maxWidth="149.0" minWidth="149.0" prefWidth="149.0" text="Clock_out" />
         </columns>
       </TableView>
       <TextField fx:id="infoField" editable="false" layoutY="1.0" maxWidth="598.0" prefHeight="25.0" prefWidth="598.0" />

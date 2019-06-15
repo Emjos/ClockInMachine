@@ -17,17 +17,17 @@
                <children>
                   <TableView fx:id="fullTable" prefHeight="190.0" prefWidth="435.0">
                     <columns>
-                      <TableColumn fx:id="emailTable" prefWidth="112.0" text="Email" />
-                      <TableColumn fx:id="dateTable" prefWidth="67.0" text="Date" />
-                        <TableColumn fx:id="clockInTable" prefWidth="99.0" text="Clock_in" />
-                        <TableColumn fx:id="clockOutTable" prefWidth="99.0" text="Clock_out" />
+                      <TableColumn fx:id="emailTable" prefWidth="124.0" text="Email" />
+                      <TableColumn fx:id="dateTable" prefWidth="95.0" text="Date" />
+                        <TableColumn fx:id="clockInTable" prefWidth="79.0" text="Clock_in" />
+                        <TableColumn fx:id="clockOutTable" prefWidth="79.0" text="Clock_out" />
                     </columns>
                   </TableView>
                   <VBox prefHeight="123.0" prefWidth="285.0">
                      <children>
                         <TextField />
                         <Line endX="127.29290771484375" endY="-5.020804405212402" startX="-100.74752807617188" startY="-5.020802974700928" />
-                        <Button fx:id="isNullButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="227.0" text="IsNull?" />
+                        <Button fx:id="isNullButton" mnemonicParsing="false" onAction="#isNullButton" prefHeight="25.0" prefWidth="227.0" text="IsNull?" />
                         <Line endX="127.29290771484375" endY="-5.020804405212402" startX="-100.74752807617188" startY="-5.020802974700928" />
                         <TextField editable="false" text="Check clock by date ? Set date :" />
                         <TextField fx:id="dateInput" promptText="YYYY-MM-DD" />

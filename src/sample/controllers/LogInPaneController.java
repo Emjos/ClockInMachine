@@ -24,7 +24,8 @@ public class LogInPaneController implements Initializable {
 
     @FXML
     private TableView<Clocks> full_table;
-
+    @FXML
+    private TableColumn<Clocks, String> email_table;
     @FXML
     private Button backButton;
 
@@ -66,24 +67,10 @@ public class LogInPaneController implements Initializable {
     }
 
     public void update_list(String email) throws SQLException, ClassNotFoundException {
-       date_table.setCellValueFactory(new PropertyValueFactory<>("date"));
-       clock_in_table.setCellValueFactory(new PropertyValueFactory<>("clockIn"));
-       clock_out_table.setCellValueFactory(new PropertyValueFactory<>("clockOut"));
-        ObservableList<Clocks> observableList = FXCollections.observableArrayList();
-
         String query = "select * from `30712964_clock_in`.clocks\n" +
                 "where username ='"+ email +"'";
-        System.out.println(query);
-        serverConnect.getConnection();
-        PreparedStatement statement = serverConnect.connection.prepareCall(query);
-        ResultSet rs = statement.executeQuery();
 
-        while (rs.next()){
-            System.out.println(rs.getString("date"));
-        observableList.add(new Clocks(rs.getString("date"),rs.getString("clock_in"),rs.getString("clock_out")));
-        }
-
-        full_table.setItems(observableList);
+        AdminPaneController.setupList(query, email_table, date_table, clock_in_table, clock_out_table, serverConnect, full_table);
 
 
     }
