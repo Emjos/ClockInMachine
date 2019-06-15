@@ -3,15 +3,19 @@ package sample.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 
+import javax.imageio.IIOParam;
 import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.function.ToDoubleBiFunction;
 
 public class MainPaneController {
 
@@ -42,9 +46,13 @@ public class MainPaneController {
     static boolean isAdmin = false;
     static String userName = null;
     static String userSurname = null;
-    Statement statement;
-   static ServerConnect serverConnect = new ServerConnect();
-public void clockInButton() throws SQLException, IOException, ClassNotFoundException {
+
+
+
+   private static ServerConnect serverConnect = new ServerConnect();
+
+
+    public void clockInButton() throws SQLException, IOException, ClassNotFoundException {
     timeDate = new Date();
 
     int whatToDo = checkData(emailText.getText(),passwordText.getText());
@@ -58,7 +66,6 @@ public void clockInButton() throws SQLException, IOException, ClassNotFoundExcep
 
     else if (whatToDo == 2){
         System.out.println("Clock in "+ emailText.getText() + timeFormat.format(timeDate) + " " + dateFormat.format(timeDate));
-        ///////////////////
 
         clockChcecker();
         ResultSet rsClock = clockChcecker();
@@ -79,7 +86,8 @@ public void clockInButton() throws SQLException, IOException, ClassNotFoundExcep
         }
 
         if (isExistOut == true){
-            System.out.println("Log in istnieje caly");
+            alertWindow.setAlert("Clock in juz istnieje");
+
         }
         else if (isExistOut == false) {
             String procedue = "{call 30712964_clock_in.add_clock_in(?,?,?)}";
@@ -136,7 +144,7 @@ public void clockInButton() throws SQLException, IOException, ClassNotFoundExcep
         }
 
         if (isExist){
-            System.out.println("Log in istnieje caly");
+            alertWindow.setAlert("Clock OUT juz istnieje");
         }
         else if (!isExist) {
             String procedue = "{call 30712964_clock_in.add_clock_out(?,?,?)}";
@@ -149,7 +157,6 @@ public void clockInButton() throws SQLException, IOException, ClassNotFoundExcep
 
     }
 }
-//TODO : Sprawdzanie czy juz taka data istnieje, jezeli nie to zapisz nowy jezeli tak to sprawdzic czy dany clock juz jest
     private void ClockInOut(String procedue) throws SQLException {
         PreparedStatement pstmt = serverConnect.connection.prepareStatement(procedue);
         pstmt.setString(1,emailText.getText());
@@ -169,9 +176,27 @@ else if (whatToDo ==1){
     NewScene newScene = new NewScene();
     newScene.newScene(event, newScene.adminPane);
     alertWindow.setAlert("Zalogowano jako admin");}
-else if(whatToDo == 2){  NewScene newScene = new NewScene();
-    newScene.newScene(event,newScene.logInPane);
-    alertWindow.setAlert("Zalogowano jako User");}
+
+
+
+else if(whatToDo == 2){
+    User user = new User(userName,userSurname,emailCheck,isAdmin);
+
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/LoginPane.fxml"));
+    Parent root1 = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.setTitle("");
+    stage.setScene(new Scene(root1));
+
+    LogInPaneController controller = fxmlLoader.<LogInPaneController>getController();
+    controller.set_title(user);
+    controller.update_list(user.getEmail());
+    stage.show();
+
+
+
+    alertWindow.setAlert("Zalogowano jako User");
+}
 else
     alertWindow.setAlert("COS POSZLO NIE TAK");
 }

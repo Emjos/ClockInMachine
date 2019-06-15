@@ -34,4 +34,7 @@ public class NewScene {
         appStage.setResizable(false);
         appStage.show();
     }
+
+
+
 }

@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.LogInPaneController">
    <children>
-      <Text layoutX="229.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USER">
-         <font>
-            <Font size="44.0" />
-         </font>
-      </Text>
-      <Button fx:id="backButton" layoutX="248.0" layoutY="335.0" mnemonicParsing="false" onAction="#backButtonAction" text="Button" />
+      <Button fx:id="backButton" layoutY="374.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="600.0" text="Back" />
+      <TableView fx:id="full_table" layoutY="25.0" prefHeight="350.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="date_table" maxWidth="200.0" minWidth="200.0" prefWidth="75.0" text="Date" />
+          <TableColumn fx:id="clock_in_table" minWidth="200.0" prefWidth="147.33330535888672" text="Clock_in" />
+            <TableColumn fx:id="clock_out_table" maxWidth="200.0" minWidth="200.0" prefWidth="360.00001525878906" text="Clock_out" />
+        </columns>
+      </TableView>
+      <TextField fx:id="infoField" editable="false" layoutY="1.0" prefHeight="25.0" prefWidth="600.0" />
    </children>
 </AnchorPane>
