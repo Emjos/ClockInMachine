@@ -97,7 +97,7 @@ public void registryButtonInAction(ActionEvent even) throws SQLException, ClassN
 
     public static void backToMain(ActionEvent event){
 
-        NewScene newScene = null;
+        NewScene newScene;
         try {
             newScene = new NewScene();
             newScene.newScene(event,newScene.mainPane);
