@@ -13,8 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.channels.CancelledKeyException;
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +39,7 @@ public class LogInPaneController implements Initializable {
     @FXML
     private TextField infoField;
     private  User user;
-    private ObservableList<Clocks> observableList;
+
     public User getUser() {
         return user;
     }
@@ -52,15 +50,12 @@ public class LogInPaneController implements Initializable {
 
 
 
-    public void initialize() {  // Auto do when open
+   // public void initialize() {  // Auto do when open}
 
 
-
-
-    }
 
     @FXML
-    void backButtonAction(ActionEvent event) throws IOException, IOException {
+    void backButtonAction(ActionEvent event) throws  IOException {
         NewScene newScene = new NewScene();
         newScene.newScene(event, newScene.mainPane);
     }
@@ -74,7 +69,7 @@ public class LogInPaneController implements Initializable {
        date_table.setCellValueFactory(new PropertyValueFactory<>("date"));
        clock_in_table.setCellValueFactory(new PropertyValueFactory<>("clockIn"));
        clock_out_table.setCellValueFactory(new PropertyValueFactory<>("clockOut"));
-        observableList = FXCollections.observableArrayList();
+        ObservableList<Clocks> observableList = FXCollections.observableArrayList();
 
         String query = "select * from `30712964_clock_in`.clocks\n" +
                 "where username ='"+ email +"'";
@@ -86,9 +81,6 @@ public class LogInPaneController implements Initializable {
         while (rs.next()){
             System.out.println(rs.getString("date"));
         observableList.add(new Clocks(rs.getString("date"),rs.getString("clock_in"),rs.getString("clock_out")));
-//            date_table.setText(rs.getString("date"));
-//            clock_in_table.setText(rs.getString("clock_in"));
-//            clock_out_table.setText(rs.getString("clock_out"));
         }
 
         full_table.setItems(observableList);

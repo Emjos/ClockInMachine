@@ -6,16 +6,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.LogInPaneController">
+<AnchorPane maxWidth="598.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.LogInPaneController">
    <children>
-      <Button fx:id="backButton" layoutY="374.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="600.0" text="Back" />
-      <TableView fx:id="full_table" layoutY="25.0" prefHeight="350.0" prefWidth="600.0">
+      <Button fx:id="backButton" layoutY="374.0" maxWidth="598.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="600.0" text="Back" />
+      <TableView fx:id="full_table" layoutY="25.0" maxWidth="598.0" prefHeight="350.0" prefWidth="598.0">
         <columns>
-          <TableColumn fx:id="date_table" maxWidth="200.0" minWidth="200.0" prefWidth="75.0" text="Date" />
-          <TableColumn fx:id="clock_in_table" minWidth="200.0" prefWidth="147.33330535888672" text="Clock_in" />
-            <TableColumn fx:id="clock_out_table" maxWidth="200.0" minWidth="200.0" prefWidth="360.00001525878906" text="Clock_out" />
+          <TableColumn fx:id="date_table" maxWidth="199.0" minWidth="199.0" prefWidth="199.0" text="Date" />
+          <TableColumn fx:id="clock_in_table" maxWidth="198.0" minWidth="198.0" prefWidth="198.0" text="Clock_in" />
+            <TableColumn fx:id="clock_out_table" maxWidth="198.0" minWidth="198.0" prefWidth="198.0" text="Clock_out" />
         </columns>
       </TableView>
-      <TextField fx:id="infoField" editable="false" layoutY="1.0" prefHeight="25.0" prefWidth="600.0" />
+      <TextField fx:id="infoField" editable="false" layoutY="1.0" maxWidth="598.0" prefHeight="25.0" prefWidth="598.0" />
    </children>
 </AnchorPane>
