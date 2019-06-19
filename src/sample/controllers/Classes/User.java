@@ -1,4 +1,4 @@
-package sample.controllers;
+package sample.controllers.Classes;
 
 public class User {
 private String name;

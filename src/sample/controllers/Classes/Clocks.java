@@ -1,4 +1,4 @@
-package sample.controllers;
+package sample.controllers.Classes;
 
 public class Clocks {
     private String email;

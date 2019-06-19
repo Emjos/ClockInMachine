@@ -1,7 +1,5 @@
 package sample.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,12 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import sample.controllers.Classes.Clocks;
+import sample.controllers.Classes.User;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -39,7 +36,7 @@ public class LogInPaneController implements Initializable {
     private TableColumn<Clocks, String> clock_out_table;
     @FXML
     private TextField infoField;
-    private  User user;
+    private User user;
 
     public User getUser() {
         return user;

@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import sample.controllers.Classes.Clocks;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -60,22 +61,28 @@ public class AdminPaneController {
 
     }
 
+    @FXML
+    void dateCheckButton(ActionEvent event) throws SQLException, ClassNotFoundException {
+
+        String query = "select * from  `30712964_clock_in`.clocks where date='"+dateInput.getText()+"'";
+        setupList(query, emailTable, dateTable, clockInTable, clockOutTable, serverConnect, fullTable);
+    }
 
     @FXML
     void isNullButton(ActionEvent event) throws SQLException, ClassNotFoundException {
         String query = "select * from  `30712964_clock_in`.clocks where clock_out is null or clock_in is null";
 
         setupList(query, emailTable, dateTable, clockInTable, clockOutTable, serverConnect, fullTable);
-        System.out.println("Tu jestem 1");
-    }
-
-    private void update_list(String query) throws SQLException, ClassNotFoundException {
-
-
-        //setupList(query, emailTable, dateTable, clockInTable, clockOutTable, serverConnect, fullTable);
-
 
     }
+
+    @FXML
+    void emailCheckButton(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String query = "select * from  `30712964_clock_in`.clocks where username='"+emaiInput.getText()+"'";
+
+        setupList(query, emailTable, dateTable, clockInTable, clockOutTable, serverConnect, fullTable);
+    }
+
 
     static void setupList(String query, TableColumn<Clocks, String> emailTable, TableColumn<Clocks, String> dateTable, TableColumn<Clocks, String> clockInTable, TableColumn<Clocks, String> clockOutTable, ServerConnect serverConnect, TableView<Clocks> fullTable) throws SQLException, ClassNotFoundException {
 
@@ -86,13 +93,11 @@ public class AdminPaneController {
         clockInTable.setCellValueFactory(new PropertyValueFactory<>("clockIn"));
         clockOutTable.setCellValueFactory(new PropertyValueFactory<>("clockOut"));
         ObservableList<Clocks> observableList = FXCollections.observableArrayList();
-        System.out.println("Tu jestem 2");
         serverConnect.getConnection();
-        System.out.println("Tu jestem 3");
         PreparedStatement statement = serverConnect.connection.prepareCall(query);
-        System.out.println("Tu jestem 4");
+
         ResultSet rs = statement.executeQuery();
-        System.out.println("Tu jestem 5");
+
 
         while (rs.next()){
 

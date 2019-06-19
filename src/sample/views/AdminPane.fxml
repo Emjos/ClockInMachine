@@ -31,11 +31,11 @@
                         <Line endX="127.29290771484375" endY="-5.020804405212402" startX="-100.74752807617188" startY="-5.020802974700928" />
                         <TextField editable="false" text="Check clock by date ? Set date :" />
                         <TextField fx:id="dateInput" promptText="YYYY-MM-DD" />
-                        <Button fx:id="dateCheckButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" text="Check" />
+                        <Button fx:id="dateCheckButton" mnemonicParsing="false" onAction="#dateCheckButton" prefHeight="25.0" prefWidth="230.0" text="Check" />
                         <Line endX="127.29290771484375" endY="-5.020804405212402" startX="-100.74752807617188" startY="-5.020802974700928" />
                         <TextField editable="false" text="Check clock by email? Set email:" />
                         <TextField fx:id="emaiInput" promptText="Email" />
-                        <Button fx:id="emailCheckButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="229.0" text="Check" />
+                        <Button fx:id="emailCheckButton" mnemonicParsing="false" onAction="#emailCheckButton" prefHeight="25.0" prefWidth="229.0" text="Check" />
                      </children>
                   </VBox>
                </children>

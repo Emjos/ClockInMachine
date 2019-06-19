@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import sample.controllers.Classes.User;
+import sample.controllers.FxScenes.AlertWindow;
 
 
 import java.io.IOException;
